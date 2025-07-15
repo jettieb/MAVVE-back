@@ -1,4 +1,4 @@
-package com.efub.mavve.global.S3Image;
+package com.efub.mavve.global.S3Image.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
