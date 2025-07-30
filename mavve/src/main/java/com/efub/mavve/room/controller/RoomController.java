@@ -5,7 +5,7 @@ import com.efub.mavve.playlist.dto.summary.PlaylistSummary;
 import com.efub.mavve.room.dto.request.RoomCreateRequest;
 import com.efub.mavve.room.dto.request.RoomUpdateRequest;
 import com.efub.mavve.room.dto.response.*;
-import com.efub.mavve.room.service.RoomChatService;
+import com.efub.mavve.room.service.websocket.RoomChatService;
 import com.efub.mavve.room.service.RoomLikeService;
 import com.efub.mavve.room.service.RoomPlaylistService;
 import com.efub.mavve.room.service.RoomService;

@@ -1,4 +1,4 @@
-package com.efub.mavve.room.service;
+package com.efub.mavve.room.service.websocket;
 
 import com.efub.mavve.auth.domain.User;
 import com.efub.mavve.global.exception.ExceptionCode;
@@ -10,6 +10,7 @@ import com.efub.mavve.room.dto.summary.ChatSummary;
 import com.efub.mavve.room.payload.request.ChatRequestPayload;
 import com.efub.mavve.room.payload.response.ChatResponsePayload;
 import com.efub.mavve.room.repository.RoomChatRepository;
+import com.efub.mavve.room.service.RoomService;
 import com.efub.mavve.room.service.websocket.PrincipalUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,7 +48,7 @@ public class RoomChatService {
     public ChatListResponse getAllChats(Long roomId, Long lastChatId) {
         LocalDateTime lastChatCreatedAt = null;
         if (lastChatId != null) {
-            RoomChat chat = getChatById(lastChatId); // 이건 존재하는지 체크하는 용도
+            RoomChat chat = getChatById(lastChatId);
             lastChatCreatedAt = chat.getCreatedAt();
         }
         Pageable pageable = PageRequest.of(0, CHATLIST_SIZE);

@@ -7,7 +7,7 @@ import com.efub.mavve.room.payload.response.AddSongResponsePayload;
 import com.efub.mavve.room.payload.response.DeleteSongResponsePayload;
 import com.efub.mavve.room.payload.response.MessageType;
 import com.efub.mavve.room.payload.response.SubscribeResponsePayload;
-import com.efub.mavve.room.service.websocket.RoomSongWebsocketService;
+import com.efub.mavve.room.service.websocket.RoomSongService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.Message;
@@ -26,26 +26,26 @@ import java.security.Principal;
 @MessageMapping("/rooms")
 public class RoomSongController {
     private final SimpMessageSendingOperations messagingTemplate;
-    private final RoomSongWebsocketService roomSongWebsocketService;
+    private final RoomSongService roomSongService;
 
     @SubscribeMapping("/{roomCode}/songs")
     public SubscribeResponsePayload subscribe(@DestinationVariable Long roomCode,
                                               Principal principal,
                                               Message<?> message) {
-        User user = roomSongWebsocketService.subscribe(roomCode, principal, message);
+        User user = roomSongService.subscribe(roomCode, principal, message);
         log.info("user{} subscribe {} room", user.getUserId(), roomCode);
         return new SubscribeResponsePayload(MessageType.SUBSCRIBE_COMPLETE);
     }
 
     @MessageMapping("/{roomCode}/add-song")
     public void addSong(@DestinationVariable Long roomCode, @Payload AddSongRequestPayload request) {
-        AddSongResponsePayload response = roomSongWebsocketService.addSong(roomCode, request);
+        AddSongResponsePayload response = roomSongService.addSong(roomCode, request);
         messagingTemplate.convertAndSend("/topic/rooms/" + roomCode + "/songs", response);
     }
 
     @MessageMapping("/{roomCode}/delete-song")
     public void deleteSongs(@DestinationVariable Long roomCode, @Payload DeleteSongRequestPayload request){
-        DeleteSongResponsePayload response = roomSongWebsocketService.deleteSongs(roomCode, request);
+        DeleteSongResponsePayload response = roomSongService.deleteSongs(roomCode, request);
         messagingTemplate.convertAndSend("/topic/rooms/" + roomCode + "/songs", response);
     }
 }

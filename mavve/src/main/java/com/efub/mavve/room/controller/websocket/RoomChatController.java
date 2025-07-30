@@ -3,7 +3,7 @@ package com.efub.mavve.room.controller.websocket;
 import com.efub.mavve.room.dto.response.ChatListResponse;
 import com.efub.mavve.room.payload.request.ChatRequestPayload;
 import com.efub.mavve.room.payload.response.ChatResponsePayload;
-import com.efub.mavve.room.service.RoomChatService;
+import com.efub.mavve.room.service.websocket.RoomChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;

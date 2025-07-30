@@ -16,7 +16,7 @@ import com.efub.mavve.room.payload.summary.SongRedis;
 import com.efub.mavve.room.repository.RoomRepository;
 import com.efub.mavve.room.service.redis.RoomSongRedisService;
 import com.efub.mavve.room.service.redis.RoomUserRedisService;
-import com.efub.mavve.room.service.websocket.RoomSongWebsocketService;
+import com.efub.mavve.room.service.websocket.RoomSongService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.efub.mavve.room.repository.RoomLikeRepository;
@@ -35,7 +35,7 @@ public class RoomService {
     private final RoomRepository roomRepository;
     private final RoomSongRedisService roomSongRedisService;
     private final RoomUserRedisService roomUserRedisService;
-    private final RoomSongWebsocketService roomSongWebsocketService;
+    private final RoomSongService roomSongService;
     private final RoomPlaylistService roomPlaylistService;
     private final RoomLikeRepository roomLikeRepository;
 
@@ -202,7 +202,7 @@ public class RoomService {
 
                 // 현재 노래 저장 및 다음 노래 스케쥴링
                 roomSongRedisService.addCurrentSong(roomId, firstSong, startTime);
-                roomSongWebsocketService.scheduleNextSong(roomId, firstSong);
+                roomSongService.scheduleNextSong(roomId, firstSong);
                 return CurrentSongSummary.from(firstSong, startTime);
             } else{
                 return null;    // 저장된 노래 시스트가 없을 경우 null 반환

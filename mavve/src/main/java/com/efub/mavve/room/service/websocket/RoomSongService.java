@@ -30,7 +30,7 @@ import java.time.ZoneId;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class RoomSongWebsocketService {
+public class RoomSongService {
     private final RoomSongRedisService songRedisService;
     private final RoomUserRedisService userRedisService;
     private final PrincipalUtil principalUtil;
